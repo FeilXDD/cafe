@@ -1,0 +1,185 @@
+{
+    "menu": {
+        "categorias": [
+            {
+                "id": 1,
+                "nombre": "Cafés",
+                "descripcion": "Variedad de cafés calientes y fríos.",
+                "productos": [
+                    {
+                        "id": 101,
+                        "nombre": "Café Americano",
+                        "descripcion": "Café negro preparado con agua caliente.",
+                        "precio": 2.50,
+                        "ingredientes": [
+                            "Café molido",
+                            "Agua caliente"
+                        ],
+                        "opciones": [
+                            {
+                                "tipo": "Tamaño",
+                                "opciones": [
+                                    "Pequeño",
+                                    "Mediano",
+                                    "Grande"
+                                ],
+                                "precio_extra": [
+                                    0.00,
+                                    0.50,
+                                    1.00
+                                ]
+                            },
+                            {
+                                "tipo": "Leche",
+                                "opciones": [
+                                    "Sin leche",
+                                    "Entera",
+                                    "Deslactosada",
+                                    "Almendra"
+                                ],
+                                "precio_extra": [
+                                    0.00,
+                                    0.30,
+                                    0.30,
+                                    0.50
+                                ]
+                            }
+                        ],
+                        "disponible": true
+                    },
+                    {
+                        "id": 102,
+                        "nombre": "Café Latte",
+                        "descripcion": "Café espresso con leche vaporizada.",
+                        "precio": 3.50,
+                        "ingredientes": [
+                            "Café espresso",
+                            "Leche vaporizada"
+                        ],
+                        "opciones": [
+                            {
+                                "tipo": "Tamaño",
+                                "opciones": [
+                                    "Pequeño",
+                                    "Mediano",
+                                    "Grande"
+                                ],
+                                "precio_extra": [
+                                    0.00,
+                                    0.50,
+                                    1.00
+                                ]
+                            },
+                            {
+                                "tipo": "Leche",
+                                "opciones": [
+                                    "Entera",
+                                    "Deslactosada",
+                                    "Almendra"
+                                ],
+                                "precio_extra": [
+                                    0.00,
+                                    0.30,
+                                    0.50
+                                ]
+                            }
+                        ],
+                        "disponible": true
+                    }
+                ]
+            },
+            {
+                "id": 2,
+                "nombre": "Tés",
+                "descripcion": "Tés calientes y fríos de diferentes sabores.",
+                "productos": [
+                    {
+                        "id": 201,
+                        "nombre": "Té Verde",
+                        "descripcion": "Té verde natural con un toque de miel.",
+                        "precio": 2.00,
+                        "ingredientes": [
+                            "Té verde",
+                            "Miel"
+                        ],
+                        "opciones": [
+                            {
+                                "tipo": "Tamaño",
+                                "opciones": [
+                                    "Pequeño",
+                                    "Mediano",
+                                    "Grande"
+                                ],
+                                "precio_extra": [
+                                    0.00,
+                                    0.50,
+                                    1.00
+                                ]
+                            }
+                        ],
+                        "disponible": true
+                    },
+                    {
+                        "id": 202,
+                        "nombre": "Té de Frutos Rojos",
+                        "descripcion": "Té de frutos rojos con un toque cítrico.",
+                        "precio": 2.50,
+                        "ingredientes": [
+                            "Té de frutos rojos",
+                            "Jugo de limón"
+                        ],
+                        "opciones": [
+                            {
+                                "tipo": "Tamaño",
+                                "opciones": [
+                                    "Pequeño",
+                                    "Mediano",
+                                    "Grande"
+                                ],
+                                "precio_extra": [
+                                    0.00,
+                                    0.50,
+                                    1.00
+                                ]
+                            }
+                        ],
+                        "disponible": true
+                    }
+                ]
+            },
+            {
+                "id": 3,
+                "nombre": "Postres",
+                "descripcion": "Deliciosos postres para acompañar tu bebida.",
+                "productos": [
+                    {
+                        "id": 301,
+                        "nombre": "Tarta de Queso",
+                        "descripcion": "Tarta de queso con base de galleta.",
+                        "precio": 4.00,
+                        "ingredientes": [
+                            "Queso crema",
+                            "Galleta",
+                            "Mermelada de fresa"
+                        ],
+                        "opciones": [],
+                        "disponible": true
+                    },
+                    {
+                        "id": 302,
+                        "nombre": "Brownie de Chocolate",
+                        "descripcion": "Brownie esponjoso con nueces.",
+                        "precio": 3.50,
+                        "ingredientes": [
+                            "Chocolate",
+                            "Harina",
+                            "Nueces"
+                        ],
+                        "opciones": [],
+                        "disponible": true
+                    }
+                ]
+            }
+        ]
+    }
+}

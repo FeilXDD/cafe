@@ -1,52 +1,130 @@
+/* Estilos generales */
 body {
-    font-family: Arial, sans-serif;
-    margin: 20px;
-  }
-  
-  h1 {
-    color: #333;
-  }
-  
-  form {
-    margin-bottom: 20px;
-  }
-  
-  label {
-    display: block;
-    margin-top: 10px;
-  }
-  
-  input {
-    width: 100%;
-    padding: 8px;
-    margin-top: 5px;
-    margin-bottom: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-  }
-  
-  button {
-    padding: 10px 20px;
-    background-color: #28a745;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-  }
-  
-  button:hover {
-    background-color: #218838;
-  }
-  
-  ul {
-    list-style-type: none;
-    padding: 0;
-  }
-  
-  li {
-    padding: 10px;
-    border: 1px solid #ddd;
-    margin-bottom: 5px;
-    border-radius: 4px;
-    background-color: #f9f9f9;
-  }
+  font-family: Arial, sans-serif;
+  margin: 20px;
+  background-color: #f4f4f9;
+}
+
+h1 {
+  color: #333;
+  text-align: center;
+}
+
+form {
+  max-width: 500px;
+  margin: 0 auto 20px auto;
+  padding: 20px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+label {
+  display: block;
+  margin-top: 10px;
+  font-weight: bold;
+}
+
+input {
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+button {
+  padding: 10px 20px;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #218838;
+}
+
+/* Estilos para las tarjetas de categorías */
+#categoriasList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+}
+
+.categoria-card {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  width: 250px;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.categoria-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.categoria-card img {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+}
+
+.categoria-card .content {
+  padding: 15px;
+}
+
+.categoria-card h3 {
+  font-size: 18px;
+  margin: 0 0 10px 0;
+  color: #333;
+}
+
+.categoria-card p {
+  font-size: 14px;
+  color: #666;
+  margin: 0 0 15px 0;
+}
+
+.categoria-card .actions {
+  display: flex;
+  gap: 10px;
+}
+
+.categoria-card .actions button {
+  flex: 1;
+  padding: 8px;
+  font-size: 14px;
+}
+
+.categoria-card .actions .btn-editar {
+  background-color: #ffc107;
+}
+
+.categoria-card .actions .btn-editar:hover {
+  background-color: #e0a800;
+}
+
+.categoria-card .actions .btn-eliminar {
+  background-color: #dc3545;
+}
+
+.categoria-card .actions .btn-eliminar:hover {
+  background-color: #bd2130;
+}
+
+.categoria-card .actions .btn-ver-productos {
+  background-color: #007bff;
+}
+
+.categoria-card .actions .btn-ver-productos:hover {
+  background-color: #0056b3;
+}

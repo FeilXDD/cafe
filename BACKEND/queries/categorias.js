@@ -15,7 +15,55 @@ const getAllCategorias = async () => {
   }) 
 } 
 
+//función para agregar una nueva categoría pide como parametros el nombre y la descripcion de la categoria
+const addCategoria = async (nombre, descripcion) => {
+  return new Promise((resolve, reject) => {
+    db.run(
+      'INSERT INTO Categorias (nombre, descripcion) VALUES (?, ?)', 
+      [nombre, descripcion], 
+      function(err) {
+        if (err) {
+          reject(err);
+        } else {
+          resolve({ id: this.lastID, nombre, descripcion });
+        }
+      }
+    );
+  });
+};
+
+
+//función para eliminar una categoría por ID 
+const deleteCategoria = async (id) => {
+  return new Promise((resolve, reject) => {
+    db.run('DELETE FROM Categorias WHERE id = ?', [id], function(err) {
+      if (err) {
+        reject(err)
+      } else {
+        resolve({ id })
+      }
+    })
+  })
+}
+
+
+//función para actualizar una categoría por ID pidendo como parametros el id, nombre y descripcion de la categoria
+const updateCategoria = async (id, nombre, descripcion) => {
+  return new Promise((resolve, reject) => {
+    db.run('UPDATE Categorias SET descripcion = ? nombre = ? WHERE id = ?', [descripcion, nombre, id], function(err) {
+      if (err) {
+        reject(err)
+      } else {
+        resolve({ id, nombre, descripcion })
+      }
+    })
+  })
+}
+
 //esporta el modulo para que pueda ser utilizado en otro archivo
 module.exports = {
   getAllCategorias,
-} 
+  addCategoria,
+  deleteCategoria,
+  updateCategoria,
+}

@@ -60,7 +60,7 @@ const updateCategoria = async (id, nombre, descripcion) => {
   })
 }
 
-//esporta el modulo para que pueda ser utilizado en otro archivo
+//exporta el modulo para que pueda ser utilizado en otro archivo
 module.exports = {
   getAllCategorias,
   addCategoria,

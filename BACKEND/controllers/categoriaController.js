@@ -13,7 +13,11 @@ const getCategorias = async (req, res) => {
 // Función para agregar una nueva categoría
 const createCategoria = async (req, res) => {
   try {
+
+    //pide nombre, descripcion del front
     const { nombre, descripcion } = req.body;
+    
+    //arroja un error si no trae el nombre
     if (!nombre) {
       return res.status(400).json({ message: 'El nombre es obligatorio' });
     }
@@ -26,6 +30,7 @@ const createCategoria = async (req, res) => {
 
 // Función para eliminar una categoría
 const removeCategoria = async (req, res) => {
+  //pide el id del front y me lo elimina
   try {
     const { id } = req.params;
     await deleteCategoria(id);
@@ -38,11 +43,16 @@ const removeCategoria = async (req, res) => {
 // Función para actualizar una categoría
 const editCategoria = async (req, res) => {
   try {
+    //pide del front id, nombre, descripcion 
     const { id } = req.params;
     const { nombre, descripcion } = req.body;
+
+    //si no trae nombre me arroja un error
     if (!nombre) {
       return res.status(400).json({ message: 'El nombre es obligatorio' });
     }
+
+    //me actualiza la informacion
     const updatedCategoria = await updateCategoria(id, nombre, descripcion);
     res.status(200).json(updatedCategoria);
   } catch (error) {

@@ -1,23 +1,29 @@
 const express = require('express');
 const cors = require('cors');
-const categoriaController = require('./controllers/categoriaController'); // Importa el controlador
-const db = require('./config/database');
-require('./initDB'); // Inicializa la base de datos
+require('./initDB'); // Inicializar la base de datos
+const categoriaController = require('./controllers/categoriaController');
+const productoController = require('./controllers/productoController');
 
 const app = express();
+const PORT = 3000;
 
-// Middlewares
+// Middleware
 app.use(cors());
 app.use(express.json());
 
-// Rutas
-app.get('/api/categorias', categoriaController.getCategorias); // Obtener todas las categorías
-app.post('/api/categorias', categoriaController.createCategoria); // Crear una nueva categoría
-app.delete('/api/categorias/:id', categoriaController.removeCategoria); // Eliminar una categoría
-app.put('/api/categorias/:id', categoriaController.editCategoria); // Actualizar una categoría
+// Endpoints para categorías
+app.get('/categorias', categoriaController.getAllCategorias);
+app.post('/categorias', categoriaController.createCategoria);
+app.put('/categorias/:id', categoriaController.updateCategoria);
+app.delete('/categorias/:id', categoriaController.deleteCategoria);
+
+// Endpoints para productos
+app.get('/categorias/:categoriaId/productos', productoController.getProductosByCategoria);
+app.post('/productos', productoController.createProducto);
+app.put('/productos/:id', productoController.updateProducto);
+app.delete('/productos/:id', productoController.deleteProducto);
 
 // Iniciar el servidor
-const PORT = 3000;
 app.listen(PORT, () => {
   console.log(`Servidor corriendo en http://localhost:${PORT}`);
 });

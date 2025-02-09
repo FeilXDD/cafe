@@ -1,69 +1,41 @@
-const { getAllCategorias, addCategoria, deleteCategoria, updateCategoria } = require('../queries/categorias');
+const categoriaQueries = require('../queries/categorias.js');
 
-// Función para obtener todas las categorías
-const getCategorias = async (req, res) => {
+exports.getAllCategorias = async (req, res) => {
   try {
-    const categorias = await getAllCategorias();
-    res.status(200).json(categorias);
+    const categorias = await categoriaQueries.getAllCategorias();
+    res.json(categorias);
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    res.status(500).json({ error: error.message });
   }
 };
 
-// Función para agregar una nueva categoría
-const createCategoria = async (req, res) => {
+exports.createCategoria = async (req, res) => {
+  const { nombre, descripcion } = req.body;
   try {
-
-    //pide nombre, descripcion del front
-    const { nombre, descripcion } = req.body;
-    
-    //arroja un error si no trae el nombre
-    if (!nombre) {
-      return res.status(400).json({ message: 'El nombre es obligatorio' });
-    }
-    const newCategoria = await addCategoria(nombre, descripcion);
-    res.status(201).json(newCategoria);
+    const id = await categoriaQueries.createCategoria(nombre, descripcion);
+    res.status(201).json({ id, nombre, descripcion });
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    res.status(500).json({ error: error.message });
   }
 };
 
-// Función para eliminar una categoría
-const removeCategoria = async (req, res) => {
-  //pide el id del front y me lo elimina
+exports.updateCategoria = async (req, res) => {
+  const { id } = req.params;
+  const { nombre, descripcion } = req.body;
   try {
-    const { id } = req.params;
-    await deleteCategoria(id);
-    res.status(200).json({ message: 'Categoría eliminada correctamente' });
+    await categoriaQueries.updateCategoria(id, nombre, descripcion);
+    res.json({ message: 'Categoría actualizada correctamente.' });
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    res.status(500).json({ error: error.message });
   }
 };
 
-// Función para actualizar una categoría
-const editCategoria = async (req, res) => {
+exports.deleteCategoria = async (req, res) => {
+  const { id } = req.params;
   try {
-    //pide del front id, nombre, descripcion 
-    const { id } = req.params;
-    const { nombre, descripcion } = req.body;
-
-    //si no trae nombre me arroja un error
-    if (!nombre) {
-      return res.status(400).json({ message: 'El nombre es obligatorio' });
-    }
-
-    //me actualiza la informacion
-    const updatedCategoria = await updateCategoria(id, nombre, descripcion);
-    res.status(200).json(updatedCategoria);
+    await categoriaQueries.deleteCategoria(id);
+    res.json({ message: 'Categoría eliminada correctamente.' });
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    res.status(500).json({ error: error.message });
   }
-};
-
-// Exporta las funciones
-module.exports = {
-  getCategorias,
-  createCategoria,
-  removeCategoria,
-  editCategoria,
 };

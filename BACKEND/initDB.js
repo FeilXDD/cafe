@@ -1,6 +1,6 @@
-const db = require('./config/database') 
+const db = require('./config/database');
 
-// Crear la tabla de categorías
+// Crear tabla Categorias
 db.run(`
   CREATE TABLE IF NOT EXISTS Categorias (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -9,49 +9,62 @@ db.run(`
   )
 `, (err) => {
   if (err) {
-    console.error('Error al crear la tabla Categorias:', err) 
+    console.error('Error al crear la tabla Categorias:', err.message);
   } else {
-    console.log('Tabla Categorias creada correctamente.') 
+    console.log('Tabla Categorias creada correctamente.');
   }
-}) 
+});
 
-// Crear la tabla de productos
+// Crear tabla Productos
 db.run(`
   CREATE TABLE IF NOT EXISTS Productos (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     nombre TEXT NOT NULL,
     descripcion TEXT,
-    precio REAL NOT NULL,
+    precio REAL NOT NULL CHECK (precio >= 0),
     categoriaId INTEGER,
     FOREIGN KEY (categoriaId) REFERENCES Categorias(id)
+      ON DELETE SET NULL
   )
 `, (err) => {
   if (err) {
-    console.error('Error al crear la tabla Productos:', err) 
+    console.error('Error al crear la tabla Productos:', err.message);
   } else {
-    console.log('Tabla Productos creada correctamente.') 
+    console.log('Tabla Productos creada correctamente.');
   }
-}) 
+});
 
-// Insertar datos iniciales
-db.serialize(() => {
-  db.run(`
-    INSERT INTO Categorias (nombre, descripcion)
-    VALUES ('Cafés', 'Variedad de cafés calientes y fríos.')
-  `) 
-  db.run(`
-    INSERT INTO Categorias (nombre, descripcion)
-    VALUES ('Tés', 'Tés calientes y fríos de diferentes sabores.')
-  `) 
+// Función para insertar datos iniciales
+const insertarDatosIniciales = () => {
+  db.serialize(() => {
+    // Insertar categorías iniciales
+    db.run(`
+      INSERT INTO Categorias (nombre, descripcion)
+      SELECT 'Cafés', 'Variedad de cafés calientes y fríos.'
+      WHERE NOT EXISTS (SELECT 1 FROM Categorias WHERE nombre = 'Cafés')
+    `);
+    db.run(`
+      INSERT INTO Categorias (nombre, descripcion)
+      SELECT 'Tés', 'Tés calientes y fríos de diferentes sabores.'
+      WHERE NOT EXISTS (SELECT 1 FROM Categorias WHERE nombre = 'Tés')
+    `);
 
-  db.run(`
-    INSERT INTO Productos (nombre, descripcion, precio, categoriaId)
-    VALUES ('Café Americano', 'Café negro preparado con agua caliente.', 2.5, 1)
-  `) 
-  db.run(`
-    INSERT INTO Productos (nombre, descripcion, precio, categoriaId)
-    VALUES ('Café Latte', 'Café espresso con leche vaporizada.', 3.5, 1)
-  `) 
-}) 
+    // Insertar productos iniciales
+    db.run(`
+      INSERT INTO Productos (nombre, descripcion, precio, categoriaId)
+      SELECT 'Café Americano', 'Café negro preparado con agua caliente.', 2.5, 
+             (SELECT id FROM Categorias WHERE nombre = 'Cafés')
+      WHERE NOT EXISTS (SELECT 1 FROM Productos WHERE nombre = 'Café Americano')
+    `);
+    db.run(`
+      INSERT INTO Productos (nombre, descripcion, precio, categoriaId)
+      SELECT 'Café Latte', 'Café espresso con leche vaporizada.', 3.5, 
+             (SELECT id FROM Categorias WHERE nombre = 'Cafés')
+      WHERE NOT EXISTS (SELECT 1 FROM Productos WHERE nombre = 'Café Latte')
+    `);
+  });
+  console.log('Datos iniciales insertados correctamente.');
+};
 
-console.log('Datos iniciales insertados correctamente.') 
+// Ejecutar la función para insertar datos iniciales
+insertarDatosIniciales();

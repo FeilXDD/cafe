@@ -9,7 +9,9 @@
 <body>
   <h1>Gestión de Categorías</h1>
 
+  <!-- Formulario para crear/editar categorías -->
   <form id="categoriaForm">
+    <h2>Crear/Editar Categoría</h2>
     <label for="nombre">Nombre:</label>
     <input type="text" id="nombre" name="nombre" required>
     <label for="descripcion">Descripción:</label>
@@ -17,8 +19,18 @@
     <button type="submit">Guardar</button>
   </form>
 
- <h2>Lista de Categorías</h2>
-  <ul id="categoriasList"></ul>
+  <!-- Lista de categorías -->
+  <h2>Lista de Categorías</h2>
+  <div id="categoriasContainer"></div>
+
+  <!-- Ventana emergente para productos -->
+  <div id="modal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <h2>Productos</h2>
+      <div id="productosList"></div>
+    </div>
+  </div>
 
   <script src="script.js"></script>
 </body>

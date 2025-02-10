@@ -1,6 +1,6 @@
 const db = require('../config/database');
 
-// Obtener todos los productos de una categoría
+//obtiene todos los productos de una categoria mediante el id
 const getProductosByCategoria = (categoriaId) => {
   return new Promise((resolve, reject) => {
     db.all(
@@ -17,7 +17,7 @@ const getProductosByCategoria = (categoriaId) => {
   });
 };
 
-// Crear un nuevo producto
+//Crea un producto y pide el nombre, la descripcion, el precio y el id a que categoria pertenece
 const createProducto = (nombre, descripcion, precio, categoriaId) => {
   return new Promise((resolve, reject) => {
     db.run(
@@ -34,7 +34,7 @@ const createProducto = (nombre, descripcion, precio, categoriaId) => {
   });
 };
 
-// Actualizar un producto
+//Actualiza el producto mediante el id del producto y el id de la categoria
 const updateProducto = (id, nombre, descripcion, precio, categoriaId) => {
   return new Promise((resolve, reject) => {
     db.run(
@@ -51,7 +51,7 @@ const updateProducto = (id, nombre, descripcion, precio, categoriaId) => {
   });
 };
 
-// Eliminar un producto
+//Elimina el producto mediante el id
 const deleteProducto = (id) => {
   return new Promise((resolve, reject) => {
     db.run('DELETE FROM Productos WHERE id = ?', [id], (err) => {
@@ -64,6 +64,7 @@ const deleteProducto = (id) => {
   });
 };
 
+//se exporta los queries
 module.exports = {
   getProductosByCategoria,
   createProducto,

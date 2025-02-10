@@ -1,6 +1,6 @@
 const db = require('./config/database');
 
-// Crear tabla Categorias
+//Crear tabla Categorias
 db.run(`
   CREATE TABLE IF NOT EXISTS Categorias (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -15,7 +15,7 @@ db.run(`
   }
 });
 
-// Crear tabla Productos
+//Crear tabla Productos
 db.run(`
   CREATE TABLE IF NOT EXISTS Productos (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -34,10 +34,10 @@ db.run(`
   }
 });
 
-// Función para insertar datos iniciales
+//Función para insertar datos iniciales
 const insertarDatosIniciales = () => {
   db.serialize(() => {
-    // Insertar categorías iniciales
+    //Insertar categorías iniciales
     db.run(`
       INSERT INTO Categorias (nombre, descripcion)
       SELECT 'Cafés', 'Variedad de cafés calientes y fríos.'
@@ -49,7 +49,7 @@ const insertarDatosIniciales = () => {
       WHERE NOT EXISTS (SELECT 1 FROM Categorias WHERE nombre = 'Tés')
     `);
 
-    // Insertar productos iniciales
+    //Insertar productos iniciales
     db.run(`
       INSERT INTO Productos (nombre, descripcion, precio, categoriaId)
       SELECT 'Café Americano', 'Café negro preparado con agua caliente.', 2.5, 

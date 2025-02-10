@@ -1,5 +1,6 @@
 const categoriaQueries = require('../queries/categorias.js');
 
+//exporta una funcion que trae todas las categorias
 exports.getAllCategorias = async (req, res) => {
   try {
     const categorias = await categoriaQueries.getAllCategorias();
@@ -9,6 +10,8 @@ exports.getAllCategorias = async (req, res) => {
   }
 };
 
+//exporta una funcion que crea una categoria 
+//pide el nombre y la descripcion
 exports.createCategoria = async (req, res) => {
   const { nombre, descripcion } = req.body;
   try {
@@ -19,6 +22,7 @@ exports.createCategoria = async (req, res) => {
   }
 };
 
+//exporta una funcion que actualiza una categoria mediante su id 1
 exports.updateCategoria = async (req, res) => {
   const { id } = req.params;
   const { nombre, descripcion } = req.body;
@@ -30,6 +34,8 @@ exports.updateCategoria = async (req, res) => {
   }
 };
 
+
+//exporta una funcion que elimina una categoria mediante su id
 exports.deleteCategoria = async (req, res) => {
   const { id } = req.params;
   try {

@@ -1,6 +1,6 @@
 const db = require('../config/database');
 
-// Obtener todas las categorías
+//obtiene todas las categoria
 const getAllCategorias = () => {
   return new Promise((resolve, reject) => {
     db.all('SELECT * FROM Categorias', (err, rows) => {
@@ -13,7 +13,7 @@ const getAllCategorias = () => {
   });
 };
 
-// Obtener una categoría por ID
+//obtiene una categoria mediante el id
 const getCategoriaById = (id) => {
   return new Promise((resolve, reject) => {
     db.get('SELECT * FROM Categorias WHERE id = ?', [id], (err, row) => {
@@ -26,7 +26,7 @@ const getCategoriaById = (id) => {
   });
 };
 
-// Crear una nueva categoría
+//Crea un producto y pide el nombre y la descripcion
 const createCategoria = (nombre, descripcion) => {
   return new Promise((resolve, reject) => {
     db.run(
@@ -43,7 +43,7 @@ const createCategoria = (nombre, descripcion) => {
   });
 };
 
-// Actualizar una categoría
+//Actualiza el producto mediante el id de la categoria
 const updateCategoria = (id, nombre, descripcion) => {
   return new Promise((resolve, reject) => {
     db.run(
@@ -60,7 +60,7 @@ const updateCategoria = (id, nombre, descripcion) => {
   });
 };
 
-// Eliminar una categoría
+//Elimina una categoria mediante el id
 const deleteCategoria = (id) => {
   return new Promise((resolve, reject) => {
     db.run('DELETE FROM Categorias WHERE id = ?', [id], (err) => {
@@ -73,6 +73,7 @@ const deleteCategoria = (id) => {
   });
 };
 
+//se exporta los queries
 module.exports = {
   getAllCategorias,
   getCategoriaById,

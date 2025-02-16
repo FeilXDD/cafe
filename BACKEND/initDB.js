@@ -66,5 +66,59 @@ const insertarDatosIniciales = () => {
   console.log('Datos iniciales insertados correctamente.');
 };
 
+//Crear tabla Carritos
+db.run(`
+  CREATE TABLE IF NOT EXISTS Carritos (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    clienteId TEXT NOT NULL, -- Identificador único del cliente (puede ser un UUID o similar)
+    productoId INTEGER NOT NULL,
+    cantidad INTEGER NOT NULL CHECK (cantidad > 0),
+    FOREIGN KEY (productoId) REFERENCES Productos(id)
+      ON DELETE CASCADE
+  )
+`, (err) => {
+  if (err) {
+    console.error('Error al crear la tabla Carritos:', err.message);
+  } else {
+    console.log('Tabla Carritos creada correctamente.');
+  }
+});
+
+// Crear tabla Pedidos
+db.run(`
+  CREATE TABLE IF NOT EXISTS Pedidos (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    clienteId TEXT NOT NULL,
+    estado TEXT NOT NULL DEFAULT 'pendiente', -- Estados: pendiente, completado
+    fechaCreacion DATETIME DEFAULT CURRENT_TIMESTAMP
+  )
+`, (err) => {
+  if (err) {
+    console.error('Error al crear la tabla Pedidos:', err.message);
+  } else {
+    console.log('Tabla Pedidos creada correctamente.');
+  }
+});
+
+// Crear tabla Detalles de Pedidos
+db.run(`
+  CREATE TABLE IF NOT EXISTS DetallesPedidos (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    pedidoId INTEGER NOT NULL,
+    productoId INTEGER NOT NULL,
+    cantidad INTEGER NOT NULL CHECK (cantidad > 0),
+    FOREIGN KEY (pedidoId) REFERENCES Pedidos(id)
+      ON DELETE CASCADE,
+    FOREIGN KEY (productoId) REFERENCES Productos(id)
+      ON DELETE CASCADE
+  )
+`, (err) => {
+  if (err) {
+    console.error('Error al crear la tabla DetallesPedidos:', err.message);
+  } else {
+    console.log('Tabla DetallesPedidos creada correctamente.');
+  }
+});
+
 // Ejecutar la función para insertar datos iniciales
 insertarDatosIniciales();

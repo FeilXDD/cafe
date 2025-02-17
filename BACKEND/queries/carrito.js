@@ -1,6 +1,6 @@
 const db = require('../config/database');
 
-// Agregar producto al carrito
+// Agregar producto al carrito pide id cliente,  id producto y cantidad
 const agregarProductoAlCarrito = (clienteId, productoId, cantidad) => {
   return new Promise((resolve, reject) => {
     db.run(
@@ -17,7 +17,7 @@ const agregarProductoAlCarrito = (clienteId, productoId, cantidad) => {
   });
 };
 
-// Obtener carrito de un cliente
+//obtiene el carrito de un cliente pide el id del cliente para traer todo su pedido
 const obtenerCarritoPorCliente = (clienteId) => {
   return new Promise((resolve, reject) => {
     db.all(
@@ -37,7 +37,7 @@ const obtenerCarritoPorCliente = (clienteId) => {
   });
 };
 
-// Vaciar carrito de un cliente
+//vacia el carrito del cliente y pide el id del cliente
 const vaciarCarrito = (clienteId) => {
   return new Promise((resolve, reject) => {
     db.run('DELETE FROM Carritos WHERE clienteId = ?', [clienteId], (err) => {

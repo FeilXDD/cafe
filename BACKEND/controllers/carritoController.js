@@ -1,5 +1,6 @@
 const carritoQueries = require('../queries/carrito');
 
+//exporta la funcion  y pide el clienteId, productoId, cantidad, si trae todo llama la funcion que agrega el producto al carrito
 exports.agregarProductoAlCarrito = async (req, res) => {
   const { clienteId, productoId, cantidad } = req.body;
   try {
@@ -10,6 +11,7 @@ exports.agregarProductoAlCarrito = async (req, res) => {
   }
 };
 
+//exporta la funcion y pide clienteId , si trae el parametro llama a la funcion que me trae el carrito
 exports.obtenerCarritoPorCliente = async (req, res) => {
   const { clienteId } = req.params;
   try {
@@ -20,6 +22,7 @@ exports.obtenerCarritoPorCliente = async (req, res) => {
   }
 };
 
+//exporta la funcion y pide clienteId , si trae el parametro llama a la funcion que me vacia lo que hay dentro del carrito el carrito
 exports.vaciarCarrito = async (req, res) => {
   const { clienteId } = req.params;
   try {

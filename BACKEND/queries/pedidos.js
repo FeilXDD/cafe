@@ -1,6 +1,6 @@
 const db = require('../config/database');
 
-// Crear un nuevo pedido
+//crea un pedido y pide el id del cliente
 const crearPedido = (clienteId) => {
   return new Promise((resolve, reject) => {
     db.run(
@@ -17,7 +17,7 @@ const crearPedido = (clienteId) => {
   });
 };
 
-// Agregar detalles del pedido
+//agrega los productos y pide la cantidad el id del producto y el id del pedido
 const agregarDetallesPedido = (pedidoId, detalles) => {
   return new Promise((resolve, reject) => {
     const stmt = db.prepare(
@@ -34,7 +34,7 @@ const agregarDetallesPedido = (pedidoId, detalles) => {
   });
 };
 
-// Obtener todos los pedidos pendientes
+//obtiene todos los pedidos pendientes
 const obtenerPedidosPendientes = () => {
   return new Promise((resolve, reject) => {
     db.all(
@@ -53,7 +53,7 @@ const obtenerPedidosPendientes = () => {
   });
 };
 
-// Marcar pedido como completado
+//elimina el pedido de la lista de pedidos pendientes y pide el id del pedido
 const marcarPedidoComoCompletado = (pedidoId) => {
   return new Promise((resolve, reject) => {
     db.run(

@@ -116,6 +116,14 @@ app.delete('/api/pedidos/:id', pedidoController.deletePedido);
 app.post('/api/login', authController.login);
 
 
+// Endpoints para categorías
+app.get('/api/categorias', categoriaController.getCategorias); // Obtener todas las categorías
+app.get('/api/categorias/:id', categoriaController.getCategoriaById); // Obtener una categoría por ID
+app.post('/api/categorias', categoriaController.createCategoria); // Crear una nueva categoría
+app.put('/api/categorias/:id', categoriaController.updateCategoria); // Actualizar una categoría
+app.delete('/api/categorias/:id', categoriaController.deleteCategoria); // Eliminar una categoría
+
+
 app.get('/api/test-connection', async (req, res) => {
     try {
         const { data, error } = await supabase.from('Usuarios').select('*').limit(1);
@@ -127,15 +135,6 @@ app.get('/api/test-connection', async (req, res) => {
         res.status(500).json({ error: 'Error al conectar con Supabase' });
     }
 });
-
-
-
-// Endpoints para categorías
-app.get('/api/categorias', categoriaController.getCategorias); // Obtener todas las categorías
-app.get('/api/categorias/:id', categoriaController.getCategoriaById); // Obtener una categoría por ID
-app.post('/api/categorias', categoriaController.createCategoria); // Crear una nueva categoría
-app.put('/api/categorias/:id', categoriaController.updateCategoria); // Actualizar una categoría
-app.delete('/api/categorias/:id', categoriaController.deleteCategoria); // Eliminar una categoría
 
 // ---------------------
 // Iniciar servidor
